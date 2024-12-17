@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #ffffff;
+}
+:root {
+  --white-theme-text: #000000;
+  --black-theme-text: #ffffff;
+  --white-theme-bg: #646464;
+  --black-theme-bg: #2c2c2c;
+  --black-theme-contrast: #e28553;
+  --white-theme-contrast: aqua;
+}
+body {
+  background-color: var(--black-theme-bg);
+  color: var(--black-theme-text);
+}
