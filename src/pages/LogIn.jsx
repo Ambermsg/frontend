@@ -1,3 +1,4 @@
+// import { useParams } from "react-router";
 import styled from "styled-components";
 import Header from "../components/Header.jsx";
 import { useForm } from "react-hook-form";
@@ -117,7 +118,9 @@ const schema = yup.object({
   password: yup.string().required("Please enter the password"),
 });
 
-const Register = () => {
+const LogIn = () => {
+  // let params = useParams();
+
   const {
     register,
     handleSubmit,
@@ -128,6 +131,7 @@ const Register = () => {
   });
 
   const onSubmit = (data) => {
+    console.log(data);
     reset();
   };
 
@@ -135,7 +139,7 @@ const Register = () => {
     <Wrapper>
       {/* <h1>It`s a register page with id: {params.id}</h1> */}
       <Header />
-      <H1>Register</H1>
+      <H1>Log In</H1>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormDiv>
           <Label htmlFor="">Username or email</Label>
@@ -165,4 +169,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default LogIn;
