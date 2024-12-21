@@ -89,6 +89,10 @@ const Input = styled.input`
   border: 0px;
   border-radius: 20px;
   background-color: #00000021;
+
+  &:focus {
+    outline: none; /* Removes the default focus border */
+  }
 `;
 
 const Form = styled.form`
