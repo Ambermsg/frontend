@@ -82,15 +82,25 @@ const Header = () => {
         <Aside ref={menuRef}>
           {/* shoouldnt add alt's for images */}
           <Section>
-            <img src="./header/language.svg" alt="" />
+            <img
+              src="./header/language.svg"
+              alt=""
+              width="16px"
+              height="16px"
+            />
             <P>Change language...</P>
           </Section>
           <Section>
-            <img src="./header/theme.svg" alt="" />
+            <img src="./header/theme.svg" alt="" width="16px" height="16px" />
             <P>Switch theme to Dark</P>
           </Section>
           <Section>
-            <img src="./header/torBrowser.svg" alt="" />
+            <img
+              src="./header/torBrowser.svg"
+              alt=""
+              width="16px"
+              height="16px"
+            />
             <P>I’m using Tor!</P>
           </Section>
         </Aside>
