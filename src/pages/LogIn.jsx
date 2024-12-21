@@ -33,12 +33,15 @@ const P = styled.p`
   text-align: center;
 `;
 const PError = styled.p`
+  margin-left: 12px;
+
   font-family: Noto Sans;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 16.34px;
-  text-align: center;
-  color: red;
+  text-align: left;
+
+  color: #ff3939;
 `;
 
 const A = styled.a`
