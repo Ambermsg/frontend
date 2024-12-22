@@ -4,6 +4,7 @@ import Header from "../components/Header.jsx";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { NavLink } from "react-router";
 
 const H1 = styled.h1`
   font-family: Noto Sans;
@@ -31,6 +32,8 @@ const P = styled.p`
   font-weight: 400;
   line-height: 16.34px;
   text-align: center;
+
+  color: #ffffff80;
 `;
 const PError = styled.p`
   margin-left: 12px;
@@ -45,6 +48,17 @@ const PError = styled.p`
 `;
 
 const A = styled.a`
+  font-family: Noto Sans;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.34px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: var(--black-theme-contrast);
+`;
+
+const NavLinkStyled = styled(NavLink)`
   font-family: Noto Sans;
   font-size: 12px;
   font-weight: 400;
@@ -167,9 +181,9 @@ const LogIn = () => {
         <A href="#">Forgot your password?</A>
         <P>
           Doesn’t have an account?
-          <A href="#" style={{ marginLeft: "5px" }}>
+          <NavLinkStyled to="/register" style={{ marginLeft: "5px" }}>
             Register
-          </A>
+          </NavLinkStyled>
         </P>
       </Section>
     </Wrapper>

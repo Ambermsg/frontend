@@ -3,6 +3,7 @@ import Header from "../components/Header.jsx";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { NavLink } from "react-router";
 
 const H1 = styled.h1`
   font-family: Noto Sans;
@@ -30,17 +31,33 @@ const P = styled.p`
   font-weight: 400;
   line-height: 16.34px;
   text-align: center;
+
+  color: #ffffff80;
 `;
 const PError = styled.p`
+  margin-left: 12px;
+
   font-family: Noto Sans;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 16.34px;
-  text-align: center;
-  color: red;
+  text-align: left;
+
+  color: #ff3939;
 `;
 
 const A = styled.a`
+  font-family: Noto Sans;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.34px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: var(--black-theme-contrast);
+`;
+
+const NavLinkStyled = styled(NavLink)`
   font-family: Noto Sans;
   font-size: 12px;
   font-weight: 400;
@@ -88,6 +105,10 @@ const Input = styled.input`
   border: 0px;
   border-radius: 20px;
   background-color: #00000021;
+
+  &:focus {
+    outline: none; /* Removes the default focus border */
+  }
 `;
 
 const Form = styled.form`
@@ -112,9 +133,46 @@ const ButtonDiv = styled.div`
   align-items: center;
 `;
 
+const Checkbox = styled.input`
+  position: relative;
+  top: 4px;
+  right: 4px;
+
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: 0px solid var(--black-theme-contrast);
+  appearance: none;
+  outline: none;
+  background: #252525;
+  position: relative;
+  cursor: pointer;
+
+  &:checked {
+    background-color: var(--black-theme-contrast);
+  }
+
+  &:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #252525;
+  }
+`;
+
 const schema = yup.object({
-  usernameEmail: yup.string().required("Please enter the username or name"),
+  email: yup.string().required("Please enter the username or name"),
   password: yup.string().required("Please enter the password"),
+  repeatPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords are not matching")
+    .required("Please confirm your password"),
+  readed: yup.boolean().oneOf([true], "Are you agreed with term of advice ?"),
 });
 
 const Register = () => {
@@ -128,6 +186,7 @@ const Register = () => {
   });
 
   const onSubmit = (data) => {
+    console.log(data);
     reset();
   };
 
@@ -138,9 +197,9 @@ const Register = () => {
       <H1>Register</H1>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormDiv>
-          <Label htmlFor="">Username or email</Label>
-          <Input type="text" {...register("usernameEmail")} />
-          <PError>{errors.usernameEmail?.message}</PError>
+          <Label htmlFor="">Email</Label>
+          <Input type="text" {...register("email")} />
+          <PError>{errors.email?.message}</PError>
         </FormDiv>
 
         <FormDiv>
@@ -148,19 +207,37 @@ const Register = () => {
           <Input type="text" {...register("password")} />
           <PError>{errors.password?.message}</PError>
         </FormDiv>
-        <ButtonDiv>
-          <Button type="submit">Login</Button>
-        </ButtonDiv>
-      </Form>
-      <Section>
-        <A href="#">Forgot your password?</A>
+
+        <FormDiv>
+          <Label htmlFor="">Repeat Password</Label>
+          <Input type="text" {...register("repeatPassword")} />
+          <PError>{errors.repeatPassword?.message}</PError>
+        </FormDiv>
+
         <P>
-          Doesn’t have an account?
+          <Checkbox type="checkbox" {...register("readed")} />
+          I’ve read and understand the
           <A href="#" style={{ marginLeft: "5px" }}>
-            Register
+            Terms of Service
           </A>
         </P>
-      </Section>
+        <PError style={{ marginRight: "50px" }}>
+          {errors.readed?.message}
+        </PError>
+
+        <ButtonDiv>
+          <Button type="submit">Register</Button>
+        </ButtonDiv>
+
+        <Section>
+          <P>
+            Already have an account?
+            <NavLinkStyled to="/login" style={{ marginLeft: "5px" }}>
+              Login
+            </NavLinkStyled>
+          </P>
+        </Section>
+      </Form>
     </Wrapper>
   );
 };
