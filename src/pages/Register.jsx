@@ -23,7 +23,7 @@ const Button = styled.button`
   padding: 10px 20px;
   border-radius: 20px;
   border: 0px;
-  background-color: var(--black-theme-contrast);
+  background-color: var(--theme-contrast);
 `;
 const P = styled.p`
   font-family: Noto Sans;
@@ -54,7 +54,7 @@ const A = styled.a`
   text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  color: var(--black-theme-contrast);
+  color: var(--theme-contrast);
 `;
 
 const NavLinkStyled = styled(NavLink)`
@@ -65,7 +65,7 @@ const NavLinkStyled = styled(NavLink)`
   text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  color: var(--black-theme-contrast);
+  color: var(--theme-contrast);
 `;
 
 const Wrapper = styled.div`
@@ -141,7 +141,7 @@ const Checkbox = styled.input`
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  border: 0px solid var(--black-theme-contrast);
+  border: 0px solid var(--theme-contrast);
   appearance: none;
   outline: none;
   background: #252525;
@@ -149,7 +149,7 @@ const Checkbox = styled.input`
   cursor: pointer;
 
   &:checked {
-    background-color: var(--black-theme-contrast);
+    background-color: var(--theme-contrast);
   }
 
   &:checked::after {

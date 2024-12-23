@@ -24,7 +24,7 @@ const Button = styled.button`
   padding: 10px 20px;
   border-radius: 20px;
   border: 0px;
-  background-color: var(--black-theme-contrast);
+  background-color: var(--theme-contrast);
 `;
 const P = styled.p`
   font-family: Noto Sans;
@@ -55,7 +55,7 @@ const A = styled.a`
   text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  color: var(--black-theme-contrast);
+  color: var(--theme-contrast);
 `;
 
 const NavLinkStyled = styled(NavLink)`
@@ -66,7 +66,7 @@ const NavLinkStyled = styled(NavLink)`
   text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  color: var(--black-theme-contrast);
+  color: var(--theme-contrast);
 `;
 
 const Wrapper = styled.div`

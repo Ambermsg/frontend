@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { useThemeStore } from "../store/themeStore";
 
 const MainImg = styled.img`
   position: absolute;
@@ -49,6 +50,8 @@ const Header = () => {
   const menuRef = useRef(null);
   const imgRef = useRef(null);
 
+  const { theme, toggleTheme } = useThemeStore();
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -90,9 +93,9 @@ const Header = () => {
             />
             <P>Change language...</P>
           </Section>
-          <Section>
+          <Section onClick={toggleTheme}>
             <img src="./header/theme.svg" alt="" width="16px" height="16px" />
-            <P>Switch theme to Dark</P>
+            <P>Switch theme to {theme === "dark" ? "dark" : "light"}</P>
           </Section>
           <Section>
             <img

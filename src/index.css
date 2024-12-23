@@ -5,14 +5,11 @@
   color: #ffffff;
 }
 :root {
-  --white-theme-text: #000000;
-  --black-theme-text: #ffffff;
-  --white-theme-bg: #646464;
-  --black-theme-bg: #2c2c2c;
-  --black-theme-contrast: #e28553;
-  --white-theme-contrast: aqua;
+  --theme-text: #ffffff;
+  --theme-bg: #2c2c2c;
+  --theme-contrast: #e28553;
 }
 body {
-  background-color: var(--black-theme-bg);
-  color: var(--black-theme-text);
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
 }
