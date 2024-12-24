@@ -1,6 +1,6 @@
 import { Header } from "../components/Header";
 
-const EmailConform = () => {
+const EmailConfirm = () => {
   return (
     <>
       <Header />
@@ -8,4 +8,4 @@ const EmailConform = () => {
   );
 };
 
-export default EmailConform;
+export default EmailConfirm;

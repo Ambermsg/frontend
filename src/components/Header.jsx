@@ -79,27 +79,22 @@ const Header = () => {
   return (
     <>
       <a href="#" onClick={toggleMenu} ref={imgRef}>
-        <MainImg src="./settings.svg" alt="settings" />
+        <MainImg src="/settings.svg" alt="settings" />
       </a>
       {isOpen ? (
         <Aside ref={menuRef}>
           {/* shoouldnt add alt's for images */}
           <Section>
-            <img
-              src="./header/language.svg"
-              alt=""
-              width="16px"
-              height="16px"
-            />
+            <img src="/header/language.svg" alt="" width="16px" height="16px" />
             <P>Change language...</P>
           </Section>
           <Section onClick={toggleTheme}>
-            <img src="./header/theme.svg" alt="" width="16px" height="16px" />
+            <img src="/header/theme.svg" alt="" width="16px" height="16px" />
             <P>Switch theme to {theme === "dark" ? "dark" : "light"}</P>
           </Section>
           <Section>
             <img
-              src="./header/torBrowser.svg"
+              src="/header/torBrowser.svg"
               alt=""
               width="16px"
               height="16px"

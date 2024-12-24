@@ -6,6 +6,7 @@ import LogIn from "./pages/LogIn.jsx";
 import Register from "./pages/Register.jsx";
 import HelloTor from "./pages/HelloTor.jsx";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
+import RegisterSecond from "./pages/RegisterSecond.jsx";
 
 const detectTorBrowser = () => {
   const userAgent = navigator.userAgent || "";
@@ -65,6 +66,7 @@ const RootForTheme = () => {
       <Route path="/" element={<App />} />
       <Route path="/login" element={<LogIn />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/register/second" element={<RegisterSecond />} />
       <Route path="/tor" element={<HelloTor />} />
     </Routes>
   );
