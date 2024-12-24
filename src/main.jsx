@@ -62,10 +62,10 @@ const RootForTheme = () => {
 
   return (
     <Routes>
-      <Route path="/frontend" element={<App />} />
-      <Route path="/frontend/login" element={<LogIn />} />
-      <Route path="/frontend/register" element={<Register />} />
-      <Route path="/frontend/tor" element={<HelloTor />} />
+      <Route path="/" element={<App />} />
+      <Route path="/login" element={<LogIn />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/tor" element={<HelloTor />} />
     </Routes>
   );
 };
