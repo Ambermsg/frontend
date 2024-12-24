@@ -4,11 +4,44 @@ import "./index.css";
 import App from "./pages/App.jsx";
 import LogIn from "./pages/LogIn.jsx";
 import Register from "./pages/Register.jsx";
-import { BrowserRouter, Route, Routes } from "react-router";
 import HelloTor from "./pages/HelloTor.jsx";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
+
+const detectTorBrowser = () => {
+  const userAgent = navigator.userAgent || "";
+
+  // Check for Tor Browser User-Agent
+  const isTorUserAgent = /tor browser/i.test(userAgent);
+
+  // Check for WebRTC disabled
+  const isWebRTCDisabled = !window.RTCPeerConnection;
+
+  // Check for Canvas Fingerprinting Resistance
+  const isCanvasBlocked = (() => {
+    try {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      ctx.fillText("test", 10, 10);
+      return canvas.toDataURL() === "data:,";
+    } catch {
+      return true;
+    }
+  })();
+
+  // Return true if any detection methods indicate Tor usage
+  return isTorUserAgent || isWebRTCDisabled || isCanvasBlocked;
+};
 
 const RootForTheme = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
+    const isTor = detectTorBrowser();
+    if (isTor) {
+      // Redirect to /tor page
+      navigate("/tor");
+    }
+
     const currentTheme =
       (typeof window !== "undefined" && localStorage.getItem("theme")) ||
       "dark";
@@ -25,18 +58,20 @@ const RootForTheme = () => {
       "--theme-contrast",
       currentTheme === "dark" ? "#e28553" : "aqua"
     );
-  }, []);
+  }, [navigate]);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/tor" element={<HelloTor />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/login" element={<LogIn />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/tor" element={<HelloTor />} />
+    </Routes>
   );
 };
 
-createRoot(document.getElementById("root")).render(<RootForTheme />);
+createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <RootForTheme />
+  </BrowserRouter>
+);

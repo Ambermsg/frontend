@@ -21,6 +21,6 @@ export const useThemeStore = create((set) => ({
         "--theme-contrast",
         newTheme === "dark" ? "#e28553" : "aqua"
       );
-      return { theme: newTheme };
+      return { theme: newTheme };   
     }),
 }));
