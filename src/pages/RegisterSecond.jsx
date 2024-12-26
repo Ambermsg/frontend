@@ -134,13 +134,27 @@ const RegisterSecond = () => {
       <P>What should we call you?</P>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormDiv>
-          <Label htmlFor="">Display name</Label>
+          <Label
+            htmlFor=""
+            onClick={(e) => {
+              e.target.nextElementSibling.focus();
+            }}
+          >
+            Display name
+          </Label>
           <Input type="text" {...register("displayName")} />
           <PError>{errors.displayName?.message}</PError>
         </FormDiv>
 
         <FormDiv>
-          <Label htmlFor="">Username</Label>
+          <Label
+            htmlFor=""
+            onClick={(e) => {
+              e.target.nextElementSibling.focus();
+            }}
+          >
+            Username
+          </Label>
           <Input type="text" {...register("username")} />
           <PError>{errors.username?.message}</PError>
         </FormDiv>

@@ -197,27 +197,53 @@ const Register = () => {
       <H1>Register</H1>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormDiv>
-          <Label htmlFor="">Email</Label>
+          <Label
+            htmlFor=""
+            onClick={(e) => {
+              e.target.nextElementSibling.focus();
+            }}
+          >
+            Email
+          </Label>
           <Input type="text" {...register("email")} />
           <PError>{errors.email?.message}</PError>
         </FormDiv>
 
         <FormDiv>
-          <Label htmlFor="">Password</Label>
-          <Input type="text" {...register("password")} />
+          <Label
+            htmlFor=""
+            onClick={(e) => {
+              e.target.nextElementSibling.focus();
+            }}
+          >
+            Password
+          </Label>
+          <Input type="password" {...register("password")} />
           <PError>{errors.password?.message}</PError>
         </FormDiv>
 
         <FormDiv>
-          <Label htmlFor="">Repeat Password</Label>
-          <Input type="text" {...register("repeatPassword")} />
+          <Label
+            htmlFor=""
+            onClick={(e) => {
+              e.target.nextElementSibling.focus();
+            }}
+          >
+            Repeat Password
+          </Label>
+          <Input type="password" {...register("repeatPassword")} />
           <PError>{errors.repeatPassword?.message}</PError>
         </FormDiv>
 
-        <P>
+        <P
+          onClick={() => {
+            const checkbox = document.querySelector('input[type="checkbox"]');
+            checkbox.click();
+          }}
+        >
           <Checkbox type="checkbox" {...register("readed")} />
           I’ve read and understand the
-          <A href="#" style={{ marginLeft: "5px" }}>
+          <A href="#" target="_blank" style={{ marginLeft: "5px" }}>
             Terms of Service
           </A>
         </P>

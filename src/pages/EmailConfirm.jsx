@@ -92,26 +92,18 @@ const PError = styled.p`
   color: #ff3939;
 `;
 
-const A = styled.a`
-  font-family: Noto Sans;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16.34px;
-  text-align: center;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-  color: var(--theme-contrast);
-`;
-
 const NavLinkStyled = styled(NavLink)`
+  text-decoration: none;
+  cursor: pointer;
   font-family: Noto Sans;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 400;
-  line-height: 16.34px;
+  line-height: 20.43px;
   text-align: center;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-  color: var(--theme-contrast);
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 0px;
+  background-color: var(--theme-bg);
 `;
 
 const Wrapper = styled.div`
@@ -211,7 +203,6 @@ const EmailConfirm = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -310,13 +301,8 @@ const EmailConfirm = () => {
         </Section>
 
         <ButtonDiv>
-          <ButtonBack
-            type="submit"
-            onClick={() => {
-              reset();
-            }}
-          >
-            Back
+          <ButtonBack type="submit">
+            <NavLinkStyled to="/login">Back</NavLinkStyled>
           </ButtonBack>
           <Button type="submit">Submit</Button>
         </ButtonDiv>

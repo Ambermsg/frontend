@@ -163,14 +163,28 @@ const LogIn = () => {
       <H1>Log In</H1>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormDiv>
-          <Label htmlFor="">Username or email</Label>
+          <Label
+            htmlFor=""
+            onClick={(e) => {
+              e.target.nextElementSibling.focus();
+            }}
+          >
+            Username or email
+          </Label>
           <Input type="text" {...register("usernameEmail")} />
           <PError>{errors.usernameEmail?.message}</PError>
         </FormDiv>
 
         <FormDiv>
-          <Label htmlFor="">Password</Label>
-          <Input type="text" {...register("password")} />
+          <Label
+            htmlFor=""
+            onClick={(e) => {
+              e.target.nextElementSibling.focus();
+            }}
+          >
+            Password
+          </Label>
+          <Input type="password" {...register("password")} />
           <PError>{errors.password?.message}</PError>
         </FormDiv>
         <ButtonDiv>
