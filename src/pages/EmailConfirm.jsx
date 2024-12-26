@@ -246,46 +246,51 @@ const EmailConfirm = () => {
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormDiv>
-          <Input
-            maxLength="1"
-            type="text"
-            {...register("first")}
-            onChange={(e) => {
-              const value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
-              e.target.value = value.slice(0, 1); // Ensure only 1 character
-            }}
-          />
-          <Input
-            maxLength="1"
-            type="text"
-            {...register("second")}
-            onChange={(e) => {
-              const value = e.target.value.replace(/[^0-9]/g, "");
-              e.target.value = value.slice(0, 1);
-            }}
-          />
-          <Input
-            maxLength="1"
-            type="text"
-            {...register("third")}
-            onChange={(e) => {
-              const value = e.target.value.replace(/[^0-9]/g, "");
-              e.target.value = value.slice(0, 1);
-            }}
-          />
-          <Input
-            maxLength="1"
-            type="text"
-            {...register("fourth")}
-            onChange={(e) => {
-              const value = e.target.value.replace(/[^0-9]/g, "");
-              e.target.value = value.slice(0, 1);
-            }}
-          />
+          {["first", "second", "third", "fourth"].map((name, index) => (
+            <Input
+              key={name}
+              maxLength="1"
+              type="number"
+              {...register(name)}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+                e.target.value = value.slice(0, 1); // Ensure only 1 character
+
+                // Move focus to the next sibling if a value is entered
+                if (value && e.target.nextElementSibling) {
+                  e.target.nextElementSibling.focus();
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  // If current input is empty, move focus to previous input
+                  if (!e.target.value && e.target.previousElementSibling) {
+                    e.target.previousElementSibling.focus();
+                  } else {
+                    // Clear the current input value
+                    e.target.value = "";
+                  }
+                }
+              }}
+              onPaste={(e) => {
+                e.preventDefault();
+
+                const pastedText = e.clipboardData.getData("Text").slice(0, 4);
+                const inputs = document.querySelectorAll(
+                  "input[type='number']"
+                );
+                for (let i = 0; i < 4; i++) {
+                  inputs[i].value = pastedText[i];
+                  console.log("inputs: ", inputs[i]);
+                }
+                inputs[3].focus();
+              }}
+            />
+          ))}
         </FormDiv>
 
         {notFilledError ? <PError>{notFilledError}</PError> : ""}
-        {errors ? <PError>{errors[0]}</PError> : ""}
+        {errors ? <PError>{errors[0]?.message}</PError> : ""}
         {/* <FormDiv>
           <Label htmlFor="">Username or email</Label>
           <Input type="text" {...register("usernameEmail")} />
@@ -305,7 +310,14 @@ const EmailConfirm = () => {
         </Section>
 
         <ButtonDiv>
-          <ButtonBack type="submit">Back</ButtonBack>
+          <ButtonBack
+            type="submit"
+            onClick={() => {
+              reset();
+            }}
+          >
+            Back
+          </ButtonBack>
           <Button type="submit">Submit</Button>
         </ButtonDiv>
       </Form>
