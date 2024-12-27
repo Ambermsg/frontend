@@ -8,6 +8,8 @@ import HelloTor from "./pages/HelloTor.jsx";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
 import RegisterSecond from "./pages/RegisterSecond.jsx";
 import EmailConfirm from "./pages/EmailConfirm.jsx";
+import AlmostDone from "./pages/AlmostDone.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const detectTorBrowser = () => {
   const userAgent = navigator.userAgent || "";
@@ -33,6 +35,8 @@ const detectTorBrowser = () => {
   // Return true if any detection methods indicate Tor usage
   return isTorUserAgent || isWebRTCDisabled || isCanvasBlocked;
 };
+
+const queryClient = new QueryClient();
 
 const RootForTheme = () => {
   const navigate = useNavigate();
@@ -68,6 +72,7 @@ const RootForTheme = () => {
       <Route path="/login" element={<LogIn />} />
       <Route path="/register" element={<Register />} />
       <Route path="/register/second" element={<RegisterSecond />} />
+      <Route path="/register/almost" element={<AlmostDone />} />
       <Route path="/tor" element={<HelloTor />} />
       <Route path="/confirm-email" element={<EmailConfirm />} />
     </Routes>
@@ -76,6 +81,8 @@ const RootForTheme = () => {
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <RootForTheme />
+    <QueryClientProvider client={queryClient}>
+      <RootForTheme />
+    </QueryClientProvider>
   </BrowserRouter>
 );

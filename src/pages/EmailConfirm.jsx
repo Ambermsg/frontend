@@ -137,14 +137,15 @@ const Input = styled.input`
   line-height: 43.58px;
   text-align: center;
 
-  &[type="number"]::-webkit-inner-spin-button,
-  &[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  &[type="number"] {
+    -moz-appearance: textfield; /* For Firefox */
   }
 
-
-  &[type="number"]::-moz-appearance: textfield;
+  &[type="number"]::-webkit-inner-spin-button,
+  &[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* For Chrome, Edge, etc. */
+    margin: 0;
+  }
 
   &:focus {
     outline: none; /* Removes the default focus border */

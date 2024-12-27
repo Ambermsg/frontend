@@ -65,7 +65,7 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  padding: 10px;
+  padding: 10px 10px 10px 20px;
   width: 270px;
   height: 40px;
   font-family: Noto Sans;
