@@ -8,6 +8,40 @@ import axios from "axios";
 import Header from "../components/Header";
 import { NavLink } from "react-router";
 
+const ButtonDiv = styled.div`
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+`;
+
+const TextArea = styled.textarea`
+  font-family: Noto Sans;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.79px;
+  text-align: left;
+
+  color: var(--theme-text);
+  background-color: #00000021;
+  border: 0px;
+  padding: 9px 12px;
+  border-radius: 20px;
+  width: 270px;
+  min-width: 270px;
+  max-width: 500px;
+  height: 100px;
+  min-height: 100px;
+  max-height: 300px;
+  border: 2px solid transparent;
+
+  &:focus {
+    border: 2px solid rgba(0, 0, 0, 0.41);
+    outline: none;
+  }
+`;
+
 const H1 = styled.h1`
   font-family: Noto Sans;
   font-size: 24px;
@@ -92,9 +126,10 @@ const Img = styled.img`
   background-color: #262626;
 `;
 
-const Div = styled.div`
+const DivForImage = styled.div`
   width: 108px;
-  margin: auto;
+
+  margin-left: 20px;
 
   display: flex;
   align-items: center;
@@ -116,18 +151,68 @@ const Wrapper = styled.div`
   justify-content: center; /* Centers content vertically */
 `;
 
+const FormWrapper = styled.div`
+  margin: 43px auto;
+  min-width: 450px;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 23px;
+
+  flex-flow: row;
+`;
+
+const BioWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+  position: relative;
+  bottom: 20px;
+
+  flex-flow: column;
+`;
+
+const Label = styled.label`
+  font-family: Noto Sans;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: left;
+  margin-left: 10px;
+
+  color: #ffffffb0;
+`;
+
+const PError = styled.p`
+  margin-left: 12px;
+
+  font-family: Noto Sans;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.34px;
+  text-align: left;
+
+  color: #ff3939;
+`;
+
 const schema = yup.object({
   avatar: yup
     .mixed()
-    .required("An image is required")
-    .test("fileType", "Only image files are allowed", (value) => {
-      return value?.type?.startsWith("image/");
-    }),
+    .nullable()
+    .test(
+      "fileType",
+      "Only image files are allowed",
+      (value) => !value || value?.type?.startsWith("image/")
+    ),
+  bio: yup.string(),
 });
 
 const AlmostDone = () => {
   const [imageSrc, setImageSrc] = useState(null);
   const {
+    register,
     control,
     handleSubmit,
     setValue,
@@ -187,7 +272,10 @@ const AlmostDone = () => {
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("avatar", data.avatar);
-    console.log("data.avatar: ", data.avatar);
+    formData.append("bio", data.bio);
+    console.log("data.bio: ", data.bio || "nothin");
+
+    console.log("data.avatar: ", data.avatar || "nothing");
 
     // Trigger the mutation to upload the image
     uploadAvatarMutation.mutate(formData);
@@ -203,46 +291,61 @@ const AlmostDone = () => {
           name="avatar"
           control={control}
           render={({ field }) => (
-            <Div>
-              <StyledUploader
-                onDrop={(e) => handleDrop(e, field.onChange)}
-                onDragOver={(e) => e.preventDefault()}
-                onClick={() => document.getElementById("fileInput").click()}
-              >
-                {imageSrc ? (
-                  <img src={imageSrc} alt="Avatar" />
-                ) : (
-                  <p>Click or Drop an image</p>
+            <FormWrapper>
+              <DivForImage>
+                <StyledUploader
+                  onDrop={(e) => handleDrop(e, field.onChange)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onClick={() => document.getElementById("fileInput").click()}
+                >
+                  {imageSrc ? (
+                    <img src={imageSrc} alt="Avatar" />
+                  ) : (
+                    <img src="/blurred.png" alt="Put avatar" />
+                  )}
+                </StyledUploader>
+                <HiddenFileInput
+                  id="fileInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleFileChange(e, field.onChange)}
+                />
+                <Img
+                  src="/correct-image.svg"
+                  alt="change image"
+                  onDrop={(e) => handleDrop(e, field.onChange)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onClick={() => document.getElementById("fileInput").click()}
+                />
+                {uploadAvatarMutation.isError && (
+                  <PError>Failed to upload image. Please try again.</PError>
                 )}
-              </StyledUploader>
-              <HiddenFileInput
-                id="fileInput"
-                type="file"
-                accept="image/*"
-                onChange={(e) => handleFileChange(e, field.onChange)}
-              />
-              <Img
-                src="/correct-image.svg"
-                alt="change image"
-                onDrop={(e) => handleDrop(e, field.onChange)}
-                onDragOver={(e) => e.preventDefault()}
-                onClick={() => document.getElementById("fileInput").click()}
-              />
-            </Div>
+              </DivForImage>
+
+              <BioWrapper>
+                <Label htmlFor="Bio">Bio</Label>
+                <TextArea
+                  name="Bio"
+                  id=""
+                  cols="40"
+                  rows="5"
+                  {...register("bio")}
+                >
+                  Hi 👋 I’m Amber user
+                </TextArea>
+              </BioWrapper>
+            </FormWrapper>
           )}
         />
         {errors.avatar && <ErrorMessage>{errors.avatar.message}</ErrorMessage>}
-
-        <NavLinkStyled to="/register/second">Back</NavLinkStyled>
-
-        <Button type="submit" disabled={uploadAvatarMutation.isLoading}>
-          {uploadAvatarMutation.isLoading ? "Uploading..." : "Enter"}
-        </Button>
+        <ButtonDiv>
+          <NavLinkStyled to="/register/second">Back</NavLinkStyled>
+          <Button type="submit" disabled={uploadAvatarMutation.isLoading}>
+            {uploadAvatarMutation.isLoading ? "Uploading..." : "Enter"}
+          </Button>
+        </ButtonDiv>
 
         {/* Display error message if upload fails */}
-        {uploadAvatarMutation.isError && (
-          <ErrorMessage>Failed to upload image. Please try again.</ErrorMessage>
-        )}
       </form>
     </Wrapper>
   );
