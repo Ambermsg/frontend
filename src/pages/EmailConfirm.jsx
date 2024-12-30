@@ -242,7 +242,8 @@ const EmailConfirm = () => {
             <Input
               key={name}
               maxLength="1"
-              type="number"
+              type="text" // Changed from "number" to "text"
+              pattern="[0-9]"
               {...register(name)}
               onChange={(e) => {
                 const value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
@@ -267,15 +268,15 @@ const EmailConfirm = () => {
               onPaste={(e) => {
                 e.preventDefault();
 
-                const pastedText = e.clipboardData.getData("Text").slice(0, 4);
-                const inputs = document.querySelectorAll(
-                  "input[type='number']"
-                );
-                for (let i = 0; i < 4; i++) {
+                const pastedText = e.clipboardData
+                  .getData("Text")
+                  .slice(0, 4)
+                  .replace(/[^0-9]/g, ""); // Ensure numeric input only
+                const inputs = document.querySelectorAll("input[type='text']"); // Adjust selector for type="text"
+                for (let i = 0; i < pastedText.length; i++) {
                   inputs[i].value = pastedText[i];
-                  console.log("inputs: ", inputs[i]);
                 }
-                inputs[3].focus();
+                inputs[Math.min(pastedText.length - 1, 3)].focus();
               }}
             />
           ))}
