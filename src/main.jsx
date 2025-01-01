@@ -1,16 +1,17 @@
 import { createRoot } from "react-dom/client";
 import { useEffect } from "react";
 import "./index.css";
-import App from "./pages/App.jsx";
-import LogIn from "./pages/LogIn.jsx";
-import Register from "./pages/Register.jsx";
-import HelloTor from "./pages/HelloTor.jsx";
+import App from "./pages/registration/App.jsx";
+import LogIn from "./pages/registration/LogIn.jsx";
+import Register from "./pages/registration/Register.jsx";
+import HelloTor from "./pages/registration/HelloTor.jsx";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
-import RegisterSecond from "./pages/RegisterSecond.jsx";
-import EmailConfirm from "./pages/EmailConfirm.jsx";
-import AlmostDone from "./pages/AlmostDone.jsx";
+import RegisterSecond from "./pages/registration/RegisterSecond.jsx";
+import EmailConfirm from "./pages/registration/EmailConfirm.jsx";
+import AlmostDone from "./pages/registration/AlmostDone.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Timer from "./pages/Timer.jsx";
+import Timer from "./pages/registration/Timer.jsx";
+import MainPage from "./pages/main/MainPage.jsx";
 
 const detectTorBrowser = () => {
   const userAgent = navigator.userAgent || "";
@@ -77,6 +78,7 @@ const RootForTheme = () => {
       <Route path="/tor" element={<HelloTor />} />
       <Route path="/confirm-email" element={<EmailConfirm />} />
       <Route path="/timer" element={<Timer />} />
+      <Route path="/app" element={<MainPage />}></Route>
     </Routes>
   );
 };

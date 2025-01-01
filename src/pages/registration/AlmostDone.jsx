@@ -5,8 +5,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query"; // Import useMutation from React Query
 import axios from "axios";
-import Header from "../components/Header";
+
 import { NavLink } from "react-router";
+import Header from "../../components/registerComponents/Header";
 
 const ButtonDiv = styled.div`
   margin-bottom: 30px;
@@ -301,7 +302,7 @@ const AlmostDone = () => {
                   {imageSrc ? (
                     <img src={imageSrc} alt="Avatar" />
                   ) : (
-                    <img src="/blurred.png" alt="Put avatar" />
+                    <img src="/almostDone/blurred.png" alt="Put avatar" />
                   )}
                 </StyledUploader>
                 <HiddenFileInput
@@ -311,7 +312,7 @@ const AlmostDone = () => {
                   onChange={(e) => handleFileChange(e, field.onChange)}
                 />
                 <Img
-                  src="/correct-image.svg"
+                  src="/almostDone/correct-image.svg"
                   alt="change image"
                   onDrop={(e) => handleDrop(e, field.onChange)}
                   onDragOver={(e) => e.preventDefault()}

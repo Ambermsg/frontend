@@ -1,5 +1,5 @@
-import ChatContextMenu from "../components/ChatContextMenu";
-import UserContextMenu from "../components/UserContextMenu";
+import ChatContextMenu from "../../components/mainComponents/ChatContextMenu";
+import UserContextMenu from "../../components/mainComponents/UserContextMenu";
 
 const App = () => {
   return (

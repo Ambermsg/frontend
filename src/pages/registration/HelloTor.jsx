@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Header from "../components/Header.jsx";
+import Header from "../../components/registerComponents/Header.jsx";
 
 import { useNavigate } from "react-router";
 

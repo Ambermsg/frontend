@@ -1,5 +1,6 @@
+// import { useParams } from "react-router";
 import styled from "styled-components";
-import Header from "../components/Header.jsx";
+import Header from "../../components/registerComponents/Header.jsx";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -133,49 +134,14 @@ const ButtonDiv = styled.div`
   align-items: center;
 `;
 
-const Checkbox = styled.input`
-  position: relative;
-  top: 4px;
-  right: 4px;
-
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  border: 0px solid var(--theme-contrast);
-  appearance: none;
-  outline: none;
-  background: #252525;
-  position: relative;
-  cursor: pointer;
-
-  &:checked {
-    background-color: var(--theme-contrast);
-  }
-
-  &:checked::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #252525;
-  }
-`;
-
 const schema = yup.object({
-  email: yup.string().required("Please enter the username or name"),
+  usernameEmail: yup.string().required("Please enter the username or name"),
   password: yup.string().required("Please enter the password"),
-  repeatPassword: yup
-    .string()
-    .oneOf([yup.ref("password")], "Passwords are not matching")
-    .required("Please confirm your password"),
-  readed: yup.boolean().oneOf([true], "Are you agreed with term of advice ?"),
 });
 
-const Register = () => {
+const LogIn = () => {
+  // let params = useParams();
+
   const {
     register,
     handleSubmit,
@@ -194,7 +160,7 @@ const Register = () => {
     <Wrapper>
       {/* <h1>It`s a register page with id: {params.id}</h1> */}
       <Header />
-      <H1>Register</H1>
+      <H1>Log In</H1>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormDiv>
           <Label
@@ -203,10 +169,10 @@ const Register = () => {
               e.target.nextElementSibling.focus();
             }}
           >
-            Email
+            Username or email
           </Label>
-          <Input type="text" {...register("email")} />
-          <PError>{errors.email?.message}</PError>
+          <Input type="text" {...register("usernameEmail")} />
+          <PError>{errors.usernameEmail?.message}</PError>
         </FormDiv>
 
         <FormDiv>
@@ -221,51 +187,21 @@ const Register = () => {
           <Input type="password" {...register("password")} />
           <PError>{errors.password?.message}</PError>
         </FormDiv>
-
-        <FormDiv>
-          <Label
-            htmlFor=""
-            onClick={(e) => {
-              e.target.nextElementSibling.focus();
-            }}
-          >
-            Repeat Password
-          </Label>
-          <Input type="password" {...register("repeatPassword")} />
-          <PError>{errors.repeatPassword?.message}</PError>
-        </FormDiv>
-
-        <P
-          onClick={() => {
-            const checkbox = document.querySelector('input[type="checkbox"]');
-            checkbox.click();
-          }}
-        >
-          <Checkbox type="checkbox" {...register("readed")} />
-          I’ve read and understand the
-          <A href="#" target="_blank" style={{ marginLeft: "5px" }}>
-            Terms of Service
-          </A>
-        </P>
-        <PError style={{ marginRight: "50px" }}>
-          {errors.readed?.message}
-        </PError>
-
         <ButtonDiv>
-          <Button type="submit">Register</Button>
+          <Button type="submit">Login</Button>
         </ButtonDiv>
-
-        <Section>
-          <P>
-            Already have an account?
-            <NavLinkStyled to="/login" style={{ marginLeft: "5px" }}>
-              Login
-            </NavLinkStyled>
-          </P>
-        </Section>
       </Form>
+      <Section>
+        <A href="#">Forgot your password?</A>
+        <P>
+          Doesn’t have an account?
+          <NavLinkStyled to="/register" style={{ marginLeft: "5px" }}>
+            Register
+          </NavLinkStyled>
+        </P>
+      </Section>
     </Wrapper>
   );
 };
 
-export default Register;
+export default LogIn;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Header from "../components/Header.jsx";
+import Header from "../../components/registerComponents/Header.jsx";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";

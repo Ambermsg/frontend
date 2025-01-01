@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useThemeStore } from "../store/themeStore";
+import { useThemeStore } from "../../store/themeStore";
 
 const MainImg = styled.img`
   position: absolute;
@@ -90,7 +90,7 @@ const Header = () => {
           </Section>
           <Section onClick={toggleTheme}>
             <img src="/header/theme.svg" alt="" width="16px" height="16px" />
-            <P>Switch theme to {theme === "dark" ? "dark" : "light"}</P>
+            <P>Switch theme to {theme === "dark" ? "light" : "dark"}</P>
           </Section>
           <Section>
             <img
