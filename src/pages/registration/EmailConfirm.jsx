@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { NavLink } from "react-router";
+import Timer from "../../components/registerComponents/Timer.js";
 
 const H1 = styled.h1`
   font-family: Noto Sans;
@@ -199,6 +200,8 @@ const schema = yup.object({
 });
 
 const EmailConfirm = () => {
+  let time = Timer();
+
   let notFilledError;
 
   const {
@@ -296,9 +299,15 @@ const EmailConfirm = () => {
           <PError>{errors.password?.message}</PError>
         </FormDiv> */}
 
+        {/* make this one defined by timer next time */}
+        {/* also add memoization for compoennts */}
         <Section>
           <PSmall>
-            Wait <SpanSmall>{"59 seconds"}</SpanSmall> to send again
+            Wait{" "}
+            <SpanSmall>
+              {time ? `${time} seconds` : "http://testlink"}
+            </SpanSmall>{" "}
+            to send again
           </PSmall>
         </Section>
 

@@ -10,7 +10,6 @@ import RegisterSecond from "./pages/registration/RegisterSecond.jsx";
 import EmailConfirm from "./pages/registration/EmailConfirm.jsx";
 import AlmostDone from "./pages/registration/AlmostDone.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Timer from "./pages/registration/Timer.jsx";
 import MainPage from "./pages/main/MainPage.jsx";
 
 const detectTorBrowser = () => {
@@ -77,7 +76,6 @@ const RootForTheme = () => {
       <Route path="/register/almost" element={<AlmostDone />} />
       <Route path="/tor" element={<HelloTor />} />
       <Route path="/confirm-email" element={<EmailConfirm />} />
-      <Route path="/timer" element={<Timer />} />
       <Route path="/app" element={<MainPage />}></Route>
     </Routes>
   );
