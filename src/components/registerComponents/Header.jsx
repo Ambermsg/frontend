@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useThemeStore } from "../../store/themeStore";
 
@@ -45,7 +45,7 @@ const P = styled.p`
   text-align: center;
 `;
 
-const Header = () => {
+const Header = memo(function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const imgRef = useRef(null);
@@ -107,6 +107,6 @@ const Header = () => {
       )}
     </>
   );
-};
+});
 
 export default Header;
